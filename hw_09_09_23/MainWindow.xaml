@@ -21,7 +21,7 @@
 
         <Menu x:Name="Menu" Grid.Row="0" Grid.ColumnSpan="2">
             <MenuItem Header="File">
-                <MenuItem Header="Open"></MenuItem>
+                <MenuItem Header="Add" Click="MenuItem_Add"></MenuItem>
                 <MenuItem Header="Close"></MenuItem>
             </MenuItem>
         </Menu>

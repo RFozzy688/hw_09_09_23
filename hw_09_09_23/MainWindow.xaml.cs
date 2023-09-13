@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,43 @@ namespace hw_09_09_23
     /// </summary>
     public partial class MainWindow : Window
     {
+        Dictionary<string, string> _playList;
         public MainWindow()
         {
             InitializeComponent();
+
+            _playList = new Dictionary<string, string>();
+        }
+
+        private void MenuItem_Add(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Video files (*.mp4)|*.mp4";
+            openFileDialog.Multiselect = true;
+
+            int count = 1;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                foreach (string file in openFileDialog.FileNames)
+                {
+                    ListBoxItem lbi = new ListBoxItem();
+
+                    if (count % 2 != 0)
+                    {
+                        lbi.Background = Brushes.LightGray;
+                    }
+
+                    lbi.Content = file.Substring(file.LastIndexOf('\\') + 1);
+                    ListBox.Items.Add(lbi);
+
+                    _playList.Add((string)lbi.Content, file);
+
+                    count++;
+                }
+                int i;
+                i = 0;
+            }
         }
     }
 }
