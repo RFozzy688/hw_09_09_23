@@ -55,9 +55,25 @@ namespace hw_09_09_23
 
                     count++;
                 }
-                int i;
-                i = 0;
             }
+        }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            string path;
+            int index = ListBox.SelectedIndex;
+
+            ListBoxItem lbi = (ListBoxItem)(ListBox.ItemContainerGenerator.ContainerFromIndex(index));
+
+            path = _playList[lbi.Content.ToString()];
+
+            Play(path);
+        }
+        private void Play(string path)
+        {
+            MediaElement.LoadedBehavior = MediaState.Manual;
+            MediaElement.Source = new Uri(path);
+            MediaElement.Play();
         }
     }
 }
