@@ -7,6 +7,42 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
+        <Menu x:Name="Menu" Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="File">
+                <MenuItem Header="Open"></MenuItem>
+                <MenuItem Header="Close"></MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <MediaElement Name="MediaElement" Grid.Row="1" Grid.Column="0"></MediaElement>
+        <ListBox Name="ListBox" Grid.Row="1" Grid.Column="1" Width="200"></ListBox>
+
+        <Slider Name="Slider" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                Margin="10,0,10,0"></Slider>
+
+        <TextBlock Name="TextBlockLeft" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"
+                   Margin="15,0,0,0">0:00:00</TextBlock>
+        <TextBlock Name="TextBlockRight" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"
+           HorizontalAlignment="Right" Margin="0,0,15,0">0:00:00</TextBlock>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2">
+            <Image Margin="0,0,5,0" Source="/play.png" Width="30" Height="30" Stretch="Fill" />
+            <Image Margin="0,0,5,0" Source="/pause.png" Width="30" Height="30" Stretch="Fill" />
+            <Image Margin="0,0,5,0" Source="/stop.png" Width="30" Height="30" Stretch="Fill" />
+            <Image Margin="0,0,5,0" Source="/back.png" Width="30" Height="30" Stretch="Fill" />
+            <Image Source="/forward.png" Width="30" Height="30" Stretch="Fill" />
+        </StackPanel>
     </Grid>
 </Window>
