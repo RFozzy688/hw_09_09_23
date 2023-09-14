@@ -25,12 +25,13 @@
                 <MenuItem Header="Close"></MenuItem>
             </MenuItem>
         </Menu>
-        
-        <MediaElement Name="MediaElement" Grid.Row="1" Grid.Column="0"></MediaElement>
+
+        <MediaElement MediaOpened="Element_MediaOpened" LoadedBehavior="Manual" Name="MediaElement" 
+                      Grid.Row="1" Grid.Column="0"></MediaElement>
         <ListBox Name="ListBox" Grid.Row="1" Grid.Column="1" Width="200" MouseDoubleClick="ListBox_MouseDoubleClick"></ListBox>
 
-        <Slider Name="Slider" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center"
-                Margin="10,0,10,0"></Slider>
+        <Slider Name="Slider" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10,0,10,0"
+                ValueChanged="TimerSlider_ValueChanged"></Slider>
 
         <TextBlock Name="TextBlockLeft" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"
                    Margin="15,0,0,0">0:00:00</TextBlock>
