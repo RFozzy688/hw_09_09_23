@@ -78,7 +78,6 @@ namespace hw_09_09_23
                 Slider.Value = 0;
                 Play(_path);
 
-                PlayImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_play.png"));
                 _isPlay = true;
 
                 PauseImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/pause.png"));
@@ -91,6 +90,7 @@ namespace hw_09_09_23
             MediaElement.Source = new Uri(path);
 
             MediaElement.Play();
+            PlayImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_play.png"));
 
             _timer.Start();
         }
@@ -147,7 +147,6 @@ namespace hw_09_09_23
             }
             return false;
         }
-
         private void PauseImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (_isPlay)
@@ -159,9 +158,10 @@ namespace hw_09_09_23
                 PauseImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_pause.png"));
             }
         }
-
         private void StopImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!_isPlay) return;
+
             MediaElement.Stop();
 
             StopImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_stop.png"));
@@ -175,10 +175,50 @@ namespace hw_09_09_23
 
             _isPlay = false;
         }
-
         private void Element_MediaEnded(object sender, RoutedEventArgs e)
         {
             MediaElement.Stop();
+
+            _timer.Stop();
+        }
+        private void BackImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!_isPlay) return;
+
+            TimeSpan currentPos = MediaElement.Position;
+
+            Slider.Value = currentPos.TotalSeconds - 10;
+            MediaElement.Position = new TimeSpan(0, 0, (int)Slider.Value);
+
+            BackImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_back.png"));
+        }
+        private void ForwardImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!_isPlay) return;
+
+            TimeSpan currentPos = MediaElement.Position;
+
+            Slider.Value = currentPos.TotalSeconds + 10;
+            MediaElement.Position = new TimeSpan(0, 0, (int)Slider.Value);
+
+            ForwardImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_forward.png"));
+        }
+        private void ForwardImg_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ForwardImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/forward.png"));
+        }
+        private void BackImg_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            BackImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/back.png"));
+        }
+        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MediaElement.Volume = SliderVolume.Value;
+            Title = MediaElement.Volume.ToString();
+        }
+        private void InitializePropertyValues()
+        {
+            //SliderVolume.Value = 50;
         }
     }
 }
