@@ -29,7 +29,6 @@ namespace hw_09_09_23
         string _path;
         bool _isPlay;
         bool _isPause;
-        TimeSpan _currentTime;
         public MainWindow()
         {
             InitializeComponent();
@@ -49,8 +48,6 @@ namespace hw_09_09_23
             openFileDialog.Filter = "Video files (*.mp4;*.wmv;*.mp3)|*.mp4;*.wmv;*.mp3";
             openFileDialog.Multiselect = true;
 
-            int count = 1;
-
             if (openFileDialog.ShowDialog() == true)
             {
                 foreach (string file in openFileDialog.FileNames)
@@ -66,8 +63,6 @@ namespace hw_09_09_23
                     ListBox.Items.Add(lbi);
 
                     _playList.Add((string)lbi.Content, file);
-
-                    count++;
                 }
             }
         }
@@ -121,6 +116,7 @@ namespace hw_09_09_23
                 {
                     Slider.Value = 0;
                     Play(_path);
+                    _isPlay = true;
                 }
             }
             else
@@ -128,12 +124,11 @@ namespace hw_09_09_23
                 MediaElement.Play();
                 _timer.Start();
                 _isPause = false;
+                _isPlay = true;
 
                 PlayImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_play.png"));
                 PauseImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/pause.png"));
             }
-
-            _isPlay = true;
 
             StopImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/stop.png"));
         }
