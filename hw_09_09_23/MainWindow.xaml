@@ -26,7 +26,8 @@
             </MenuItem>
         </Menu>
 
-        <MediaElement MediaOpened="Element_MediaOpened" LoadedBehavior="Manual" Name="MediaElement" 
+        <MediaElement MediaOpened="Element_MediaOpened" Name="MediaElement" 
+                      MediaEnded="Element_MediaEnded"
                       Grid.Row="1" Grid.Column="0"></MediaElement>
         <ListBox Name="ListBox" Grid.Row="1" Grid.Column="1" Width="200" MouseDoubleClick="ListBox_MouseDoubleClick"></ListBox>
 
@@ -39,9 +40,9 @@
            HorizontalAlignment="Right" Margin="0,0,15,0">0:00:00</TextBlock>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2">
-            <Image Margin="0,0,5,0" Source="/play.png" Width="30" Height="30" Stretch="Fill" />
-            <Image Margin="0,0,5,0" Source="/pause.png" Width="30" Height="30" Stretch="Fill" />
-            <Image Margin="0,0,5,0" Source="/stop.png" Width="30" Height="30" Stretch="Fill" />
+            <Image Name="PlayImg" Margin="0,0,5,0" Width="30" Height="30" Stretch="Fill" MouseLeftButtonDown="PlayImage_MouseLeftButtonDown" Source="/play.png" />
+            <Image Name="PauseImg" Margin="0,0,5,0" Source="/pause.png" Width="30" Height="30" Stretch="Fill" MouseLeftButtonDown="PauseImg_MouseLeftButtonDown" />
+            <Image Name="StopImg" Margin="0,0,5,0" Source="/stop.png" Width="30" Height="30" Stretch="Fill" MouseLeftButtonDown="StopImg_MouseLeftButtonDown" />
             <Image Margin="0,0,5,0" Source="/back.png" Width="30" Height="30" Stretch="Fill" />
             <Image Source="/forward.png" Width="30" Height="30" Stretch="Fill" />
         </StackPanel>

@@ -12,6 +12,16 @@
     <None Remove="forward.png" />
     <None Remove="pause.png" />
     <None Remove="play.png" />
+    <None Remove="Resources\back.png" />
+    <None Remove="Resources\cyan_back.png" />
+    <None Remove="Resources\cyan_forward.png" />
+    <None Remove="Resources\cyan_pause.png" />
+    <None Remove="Resources\cyan_play.png" />
+    <None Remove="Resources\cyan_stop.png" />
+    <None Remove="Resources\forward.png" />
+    <None Remove="Resources\pause.png" />
+    <None Remove="Resources\play.png" />
+    <None Remove="Resources\stop.png" />
     <None Remove="stop.png" />
   </ItemGroup>
 
@@ -20,6 +30,34 @@
     <Resource Include="forward.png" />
     <Resource Include="pause.png" />
     <Resource Include="play.png" />
+    <Resource Include="Resources\back.png" />
+    <Resource Include="Resources\cyan_back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\cyan_forward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\cyan_pause.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\cyan_play.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\cyan_stop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\forward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\pause.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\play.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\stop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="stop.png" />
   </ItemGroup>
 

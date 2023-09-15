@@ -26,6 +26,10 @@ namespace hw_09_09_23
     {
         Dictionary<string, string> _playList;
         DispatcherTimer _timer;
+        string _path;
+        bool _isPlay;
+        bool _isPause;
+        TimeSpan _currentTime;
         public MainWindow()
         {
             InitializeComponent();
@@ -35,6 +39,9 @@ namespace hw_09_09_23
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += new EventHandler(CurrentTime);
+
+            _isPlay = false;
+            _isPause = false;
         }
         private void MenuItem_Add(object sender, RoutedEventArgs e)
         {
@@ -66,17 +73,21 @@ namespace hw_09_09_23
         }
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string path;
-            int index = ListBox.SelectedIndex;
+            if (IsSelectedItem())
+            {
+                Slider.Value = 0;
+                Play(_path);
 
-            ListBoxItem lbi = (ListBoxItem)(ListBox.ItemContainerGenerator.ContainerFromIndex(index));
+                PlayImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_play.png"));
+                _isPlay = true;
 
-            path = _playList[lbi.Content.ToString()];
-
-            Play(path);
+                PauseImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/pause.png"));
+                StopImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/stop.png"));
+            }
         }
         private void Play(string path)
         {
+            MediaElement.LoadedBehavior = MediaState.Manual;
             MediaElement.Source = new Uri(path);
 
             MediaElement.Play();
@@ -97,6 +108,77 @@ namespace hw_09_09_23
         private void TimerSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MediaElement.Position = new TimeSpan(0, 0, (int)Slider.Value);
+        }
+        private void PlayImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!_isPause)
+            {
+                if (IsSelectedItem() && !_isPlay)
+                {
+                    Slider.Value = 0;
+                    Play(_path);
+                }
+            }
+            else
+            {
+                MediaElement.Play();
+                _timer.Start();
+                _isPause = false;
+
+                PlayImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_play.png"));
+                PauseImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/pause.png"));
+            }
+
+            _isPlay = true;
+
+            StopImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/stop.png"));
+        }
+        private bool IsSelectedItem()
+        {
+            int index = ListBox.SelectedIndex;
+
+            if (index != -1)
+            {
+                ListBoxItem lbi = (ListBoxItem)(ListBox.ItemContainerGenerator.ContainerFromIndex(index));
+
+                _path = _playList[lbi.Content.ToString()];
+
+                return true;
+            }
+            return false;
+        }
+
+        private void PauseImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_isPlay)
+            {
+                _isPause = true;
+                _timer.Stop();
+                MediaElement.Pause();
+                PlayImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/play.png"));
+                PauseImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_pause.png"));
+            }
+        }
+
+        private void StopImg_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MediaElement.Stop();
+
+            StopImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/cyan_stop.png"));
+
+            PlayImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/play.png"));
+            PauseImg.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/pause.png"));
+
+            _timer.Stop();
+            Slider.Value = 0;
+            TextBlockLeft.Text = "0:00:00";
+
+            _isPlay = false;
+        }
+
+        private void Element_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            MediaElement.Stop();
         }
     }
 }
