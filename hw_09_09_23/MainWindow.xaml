@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hw_09_09_23"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Media Player" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -22,14 +22,15 @@
         <Menu x:Name="Menu" Grid.Row="0" Grid.ColumnSpan="2">
             <MenuItem Header="File">
                 <MenuItem Header="Add" Click="MenuItem_Add"></MenuItem>
-                <MenuItem Header="Close"></MenuItem>
+                <MenuItem Header="Close" Click="MenuItem_Close"></MenuItem>
             </MenuItem>
         </Menu>
 
         <MediaElement MediaOpened="Element_MediaOpened" Name="MediaElement" 
                       MediaEnded="Element_MediaEnded"
-                      Grid.Row="1" Grid.Column="0"></MediaElement>
-        <ListBox Name="ListBox" Grid.Row="1" Grid.Column="1" Width="200" MouseDoubleClick="ListBox_MouseDoubleClick"></ListBox>
+                      Grid.Row="1" Grid.Column="0" Margin="10"></MediaElement>
+        <ListBox Name="ListBox" Grid.Row="1" Grid.Column="1" Width="200" MouseDoubleClick="ListBox_MouseDoubleClick"
+                 Margin="10"></ListBox>
 
         <Slider Name="Slider" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10,0,10,0"
                 ValueChanged="TimerSlider_ValueChanged"></Slider>

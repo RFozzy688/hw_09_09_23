@@ -46,7 +46,7 @@ namespace hw_09_09_23
         private void MenuItem_Add(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Video files (*.mp4)|*.mp4";
+            openFileDialog.Filter = "Video files (*.mp4;*.wmv;*.mp3)|*.mp4;*.wmv;*.mp3";
             openFileDialog.Multiselect = true;
 
             int count = 1;
@@ -57,7 +57,7 @@ namespace hw_09_09_23
                 {
                     ListBoxItem lbi = new ListBoxItem();
 
-                    if (count % 2 != 0)
+                    if (ListBox.Items.Count % 2 != 0)
                     {
                         lbi.Background = Brushes.LightGray;
                     }
@@ -70,6 +70,10 @@ namespace hw_09_09_23
                     count++;
                 }
             }
+        }
+        private void MenuItem_Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -214,11 +218,6 @@ namespace hw_09_09_23
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MediaElement.Volume = SliderVolume.Value;
-            Title = MediaElement.Volume.ToString();
-        }
-        private void InitializePropertyValues()
-        {
-            //SliderVolume.Value = 50;
         }
     }
 }
